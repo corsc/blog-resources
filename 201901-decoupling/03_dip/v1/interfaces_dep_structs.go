@@ -18,25 +18,20 @@
 // OR IMPLY ANY RIGHTS TO REPRODUCE, DISCLOSE OR DISTRIBUTE ITS CONTENTS, OR TO MANUFACTURE, USE, OR SELL ANYTHING
 // THAT IT MAY DESCRIBE, IN WHOLE OR IN PART.
 
-package v2
+package v1
 
 import (
 	"time"
 )
 
-type PersonLoaderConfig interface {
-	DSN() string
-	MaxConnections() int
-	Timeout() time.Duration
+type Config struct {
+	DSN            string
+	MaxConnections int
+	Timeout        time.Duration
 }
 
-type PersonLoader struct {
-	Config PersonLoaderConfig
-}
-
-func (p *PersonLoader) Load(ID int) (*Person, error) {
-	// not implemented
-	return nil, nil
+type PersonLoader interface {
+	Load(cfg *Config, ID int) *Person
 }
 
 type Person struct {
