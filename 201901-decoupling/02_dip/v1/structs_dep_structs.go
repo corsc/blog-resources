@@ -18,14 +18,27 @@
 // OR IMPLY ANY RIGHTS TO REPRODUCE, DISCLOSE OR DISTRIBUTE ITS CONTENTS, OR TO MANUFACTURE, USE, OR SELL ANYTHING
 // THAT IT MAY DESCRIBE, IN WHOLE OR IN PART.
 
-package v2
+package v1
 
 type PizzaMaker struct{}
 
-func (p *PizzaMaker) Make(oven Oven) {
-	// build and bake pizza
+func (p *PizzaMaker) MakePizza(oven *SuperPizaOven5000) {
+	pizza := p.buildPizza()
+	oven.Bake(pizza)
 }
 
-type Oven interface {
-	Bake()
+type SuperPizaOven5000 struct{}
+
+func (s *SuperPizaOven5000) Bake(pizza Pizza) {
+	// not implemented
+}
+
+func (p *PizzaMaker) buildPizza() Pizza {
+	// not implemented
+	return Pizza{}
+}
+
+type Pizza struct {
+	Toppings []string
+	Sauce    string
 }
